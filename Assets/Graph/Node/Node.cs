@@ -10,6 +10,14 @@ public class Node : MonoBehaviour
     [SerializeField]
     Team Team;
 
+    readonly public HashSet<Node> Neighbourgs = new HashSet<Node>();
+
+    public void AddNeighbourg(Node node)
+    {
+        Neighbourgs.Add(node);
+        node.Neighbourgs.Add(this);
+    }
+
     public int GetArmySize()
     {
         return armySize;
@@ -18,17 +26,5 @@ public class Node : MonoBehaviour
     public Team GetTeam()
     {
         return Team;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
