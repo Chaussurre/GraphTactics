@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    [SerializeField, Range(0, 100)]
-    int armySize;
+    [SerializeField, Range(0f, 100f)]
+    float armySize;
 
     [SerializeField]
     Team Team;
@@ -18,11 +18,45 @@ public class Node : MonoBehaviour
         node.Neighbourgs.Add(this);
     }
 
-    public int GetArmySize()
+
+    public void Attacked(Team attacker, int armySize)
     {
-        return armySize;
+        int defendingArmy = GetArmySize();
+        int resultArmy = defendingArmy;
+
+        if (Team != attacker)
+            resultArmy -= armySize;
+        else
+            resultArmy += armySize;
+
+        if(resultArmy < 0)
+        {
+            Team = attacker;
+            resultArmy *= -1;
+        }
+
+        this.armySize = resultArmy;
     }
 
+    public void TryAttack(Node target)
+    {
+        if (Neighbourgs.Contains(target))
+        {
+            target.Attacked(Team, GetArmySize());
+            armySize -= GetArmySize();
+        }
+    }
+
+    public void gainArmy(float gain)
+    {
+        armySize += gain;
+        armySize = Mathf.Min(armySize, 100);
+    }
+
+    public int GetArmySize()
+    {
+        return Mathf.FloorToInt(armySize);
+    }
     public Team GetTeam()
     {
         return Team;
