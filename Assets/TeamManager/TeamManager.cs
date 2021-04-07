@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class TeamManager : MonoBehaviour
 {
+    readonly public List<Team> Teams = new List<Team>();
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Teams.AddRange(GetComponentsInChildren<Team>());
     }
 }

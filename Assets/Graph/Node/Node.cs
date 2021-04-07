@@ -7,9 +7,17 @@ public class Node : MonoBehaviour
     [SerializeField, Range(0, 100)]
     int armySize;
 
+    [SerializeField]
+    Team Team;
+
     public int GetArmySize()
     {
         return armySize;
+    }
+
+    public Team GetTeam()
+    {
+        return Team;
     }
 
     // Start is called before the first frame update

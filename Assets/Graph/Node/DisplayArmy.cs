@@ -7,13 +7,29 @@ using UnityEngine.UI;
 public class DisplayArmy : MonoBehaviour
 {
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        Node node = GetComponent<Node>();
+        DisplayArmySize(node);
+        DisplayTeam(node);
+    }
+
+    void DisplayTeam(Node node)
+    {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        Team team = node.GetTeam();
+        if (team != null)
+            renderer.color = team.GetColor();
+        else
+            renderer.color = Color.grey;
+    }
+
+    void DisplayArmySize(Node node)
     {
         Text text = GetComponentInChildren<Text>();
         if (text == null)
             return;
 
-        Node node = GetComponent<Node>();
         text.text = node.GetArmySize().ToString();
     }
 }
