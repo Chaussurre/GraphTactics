@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armySize: 0
+  ArmyPrefab: {fileID: 2417559152991698598, guid: 9dc5f06391c35544dae4b121cd1430f4, type: 3}
   Team: {fileID: 0}
 --- !u!114 &3723547585018024316
 MonoBehaviour:

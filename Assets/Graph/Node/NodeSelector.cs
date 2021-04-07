@@ -27,8 +27,10 @@ public class NodeSelector : MonoBehaviour
             Selected = this;
         else
         {
-            Selected.Node.TryAttack(Node);
-            Selected = null;
+            if (Selected.Node.TryAttack(Node))
+                Selected = null;
+            else
+                Selected = this;
         }
     }
 }
