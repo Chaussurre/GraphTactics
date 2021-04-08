@@ -12,7 +12,7 @@ public class Graph : MonoBehaviour
     private void Start()
     {
         foreach (Edge edge in GetComponentsInChildren<Edge>())
-            edge.Left.AddNeighbourg(edge.Right);
+            edge.Left.AddNeighbourg(edge);
 
         foreach (Node node in GetComponentsInChildren<Node>())
             Nodes.Add(node);

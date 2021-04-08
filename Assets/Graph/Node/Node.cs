@@ -8,17 +8,15 @@ public class Node : MonoBehaviour
     float armySize;
 
     [SerializeField]
-    Army ArmyPrefab;
-
-    [SerializeField]
     Team Team;
 
-    readonly public HashSet<Node> Neighbourgs = new HashSet<Node>();
+    readonly public HashSet<Edge> Neighbourgs = new HashSet<Edge>();
 
-    public void AddNeighbourg(Node node)
+
+    public void AddNeighbourg(Edge edge)
     {
-        Neighbourgs.Add(node);
-        node.Neighbourgs.Add(this);
+        Neighbourgs.Add(edge);
+        edge.GetOtherNode(this).Neighbourgs.Add(edge);
     }
 
 
@@ -43,14 +41,14 @@ public class Node : MonoBehaviour
 
     public bool TryAttack(Node target)
     {
-        if (Neighbourgs.Contains(target))
-        {
-            Army army = Instantiate(ArmyPrefab, transform.parent);
-            army.Send(Team, GetArmySize(), this, target);
-            armySize -= GetArmySize();
+        foreach (Edge edge in Neighbourgs)
+            if (edge.GetOtherNode(this) == target)
+            {
+                edge.SendArmy(this, GetArmySize());
+                armySize -= GetArmySize();
 
-            return true;
-        }
+                return true;
+            }
         return false;
     }
 

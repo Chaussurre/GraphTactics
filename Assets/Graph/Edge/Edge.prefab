@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8722325323486587894}
   - component: {fileID: 6130962356118136365}
   - component: {fileID: -8606437006799707025}
+  - component: {fileID: 8250831139495549456}
   m_Layer: 0
   m_Name: Edge
   m_TagString: Untagged
@@ -95,6 +96,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 579599c448167514d985a238e3f1bd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 0.15
+  ArmyPrefab: {fileID: 3260625292761802747, guid: 9dc5f06391c35544dae4b121cd1430f4, type: 3}
   Left: {fileID: 0}
   Right: {fileID: 0}
+--- !u!114 &8250831139495549456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670103268913123480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ac1e77dc84e30469d4706bbe1dc63a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 0.15
