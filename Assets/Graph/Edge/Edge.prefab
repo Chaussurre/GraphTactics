@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 579599c448167514d985a238e3f1bd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArmyPrefab: {fileID: 3260625292761802747, guid: 9dc5f06391c35544dae4b121cd1430f4, type: 3}
+  ArmyPrefab: {fileID: 2417559152991698598, guid: 9dc5f06391c35544dae4b121cd1430f4, type: 3}
   Left: {fileID: 0}
   Right: {fileID: 0}
 --- !u!114 &8250831139495549456

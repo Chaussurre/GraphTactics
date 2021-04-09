@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Army))]
 public class ArmyMove : MonoBehaviour
 {
+    public Node From { get; private set; }
+    public Node Target { get; private set; }
     Army Army;
-    Node From;
-    Node Target;
 
     [SerializeField, Range(0.001f, 1f)]
     float Speed;
@@ -35,17 +34,29 @@ public class ArmyMove : MonoBehaviour
         }
 
         transform.position = Vector2.Lerp(From.transform.position, Target.transform.position, position);
+        GetComponentInChildren<Text>().text = Army.Size.ToString();
     }
 
-    public void Send(int size, Node from, Node target)
+    public void Send(Node from, Node target)
     {
         transform.position = from.transform.position;
         From = from;
         Target = target;
 
-        GetComponentInChildren<Text>().text = size.ToString();
         GetComponentInChildren<SpriteRenderer>().color = from.GetTeam().GetColor();
+    }
 
-        Army.Send(size, from, target);
+    public bool isColliding(ArmyMove other) //Only call on two armies on the same edge
+    {
+        if (Army.Team == other.Army.Team) //Same team
+            return false;
+
+        if (other.From == From) //Same direction
+            return false;
+
+        if (position < 1 - other.position) //Have yet to meet
+            return false;
+
+        return true;
     }
 }

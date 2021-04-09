@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    [SerializeField, Range(0f, 100f)]
+    [SerializeField, Range(0f, 100f, order = 0)]
     float armySize;
 
     [SerializeField]

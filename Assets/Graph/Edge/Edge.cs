@@ -5,12 +5,12 @@ using UnityEngine;
 public class Edge : MonoBehaviour
 {
     [SerializeField]
-    ArmyMove ArmyPrefab;
+    Army ArmyPrefab;
 
     public Node Left;
     public Node Right;
 
-    readonly public HashSet<Army> armies = new HashSet<Army>();
+    readonly public HashSet<Army> Armies = new HashSet<Army>();
 
     public Node GetOtherNode(Node node)
     {
@@ -22,7 +22,16 @@ public class Edge : MonoBehaviour
     public void SendArmy(Node from, int armySize)
     {
         Node target = GetOtherNode(from);
-        ArmyMove army = Instantiate(ArmyPrefab, transform.parent);
-        army.Send(armySize, from, target);
+        Army army = Instantiate(ArmyPrefab, transform.parent);
+        Armies.Add(army);
+        army.Send(armySize, from, target, this);
+    }
+
+    private void Update()
+    {
+        foreach (Army army1 in Armies)
+            foreach (Army army2 in Armies)
+                if(army1.TryCollide(army2))
+                    return; //Only deal in one collision at a time
     }
 }
