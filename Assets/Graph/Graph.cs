@@ -6,8 +6,6 @@ public class Graph : MonoBehaviour
 {
     HashSet<Node> Nodes = new HashSet<Node>();
 
-    [SerializeField, Range(0.1f, 10f)]
-    float SoldierGrowth = 0.1f;
 
     private void Start()
     {
@@ -16,12 +14,5 @@ public class Graph : MonoBehaviour
 
         foreach (Node node in GetComponentsInChildren<Node>())
             Nodes.Add(node);
-    }
-
-    private void FixedUpdate()
-    {
-        foreach (Node node in Nodes)
-            if (node.GetTeam() != null)
-                node.gainArmy(SoldierGrowth * Time.fixedDeltaTime);
     }
 }
