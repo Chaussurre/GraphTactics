@@ -42,7 +42,7 @@ public class BuildingModuleDisplay : MonoBehaviour
         
         Node node = GetComponentInParent<Node>();
 
-        Color color = node.GetTeam().GetColor();
+        Color color = Team.TeamColor(node.GetTeam());
         color = new Color(color.r, color.g, color.b, alpha);
 
         RangeDisplay.GetComponent<SpriteRenderer>().color = color;

@@ -21,4 +21,11 @@ public class Team : MonoBehaviour
     {
         return Color;
     }
+
+    public static Color TeamColor(Team team)
+    {
+        if (team != null)
+            return team.GetColor();
+        return Color.grey;
+    }
 }
