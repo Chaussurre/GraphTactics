@@ -4,23 +4,40 @@ using UnityEngine;
 
 public class Canon : Building
 {
+    [SerializeField]
+    CanonRay RayPrefab;
+
+    CanonRay Ray = null;
+
     [SerializeField, Range(0f, 100f)]
     float DamagePerSec;
 
     float Damage = 0;
-    Army Targetted;
+
+    Army Targetted = null;
 
     public override void OnUpdate(float deltaTime, Node node)
     {
-        float rangeSqr = Range * Range;
-        if (Targetted == null 
-            || (node.transform.position - Targetted.transform.position).sqrMagnitude > rangeSqr)
-            Targetted = FindTarget(node.transform.position, rangeSqr, node.GetTeam());
+        ManageTarget(node);
+        DealDamage(deltaTime, node);
+        UpdateRay(node);
+    }
 
+    void UpdateRay(Node node)
+    {
         if (Targetted == null)
             return;
 
-        Debug.DrawLine(node.transform.position, Targetted.transform.position);
+        if(Ray == null)
+            Ray = Instantiate(RayPrefab);
+
+        Ray.Target(node, Targetted);
+    }
+
+    void DealDamage(float deltaTime, Node node)
+    {
+        if (Targetted == null)
+            return;
 
         Damage += DamagePerSec * deltaTime;
         if (Damage >= 1)
@@ -28,6 +45,33 @@ public class Canon : Building
             int damageDone = Mathf.FloorToInt(Damage);
             Targetted.DealDamage(damageDone);
             Damage -= damageDone;
+        }
+    }
+
+    void ManageTarget(Node node)
+    {
+        float rangeSqr = Range * Range;
+
+        if (Targetted != null)
+        {
+            if (!Targetted.isActiveAndEnabled //Target is dead
+                || (node.transform.position - Targetted.transform.position).sqrMagnitude > rangeSqr) //Target is too far
+                SetNoTarget();
+        }
+        else
+            SetNoTarget();
+
+        if (Targetted == null)
+            Targetted = FindTarget(node.transform.position, rangeSqr, node.GetTeam());
+    }
+
+    void SetNoTarget()
+    {
+        Targetted = null;
+        if (Ray != null)
+        {
+            Destroy(Ray.gameObject);
+            Ray = null;
         }
     }
 

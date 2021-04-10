@@ -12,24 +12,30 @@ public class BuildingModuleDisplay : MonoBehaviour
     {
         BuildingModule Module = GetComponentInParent<BuildingModule>();
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        
+
         if (Module == null || renderer == null)
             return;
 
         Building building = Module.GetBuilding();
-        
-        Module.GetComponent<SpriteRenderer>().enabled = building != null;
-        
+        if (building == null)
+            building = Module.BuildingPrefab;
+
+
         if (building != null)
         {
+            Module.GetComponent<SpriteRenderer>().enabled = true;
             renderer.sprite = building.GetIcone();
-            DisplayRange(building);
+            DisplayRange(building.Range, building.ZoneAlpha);
         }
         else
+        {
+            Module.GetComponent<SpriteRenderer>().enabled = false;
             renderer.sprite = null;
+            DisplayRange(0, 0);
+        }
     }
 
-    void DisplayRange(Building building)
+    void DisplayRange(float size, float alpha)
     {
         if (RangeDisplay == null)
             return;
@@ -37,10 +43,10 @@ public class BuildingModuleDisplay : MonoBehaviour
         Node node = GetComponentInParent<Node>();
 
         Color color = node.GetTeam().GetColor();
-        color = new Color(color.r, color.g, color.b, building.ZoneAlpha);
+        color = new Color(color.r, color.g, color.b, alpha);
 
         RangeDisplay.GetComponent<SpriteRenderer>().color = color;
 
-        RangeDisplay.transform.localScale = new Vector3(1, 1) * building.Range * 2 + Vector3.forward;
+        RangeDisplay.transform.localScale = new Vector3(1, 1) * size * 2 + Vector3.forward;
     }
 }
