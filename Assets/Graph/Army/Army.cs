@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ArmyMove))]
+[RequireComponent(typeof(DisplayArmy))]
 public class Army : MonoBehaviour
 {
     public Team Team { get; private set; }
@@ -13,17 +13,24 @@ public class Army : MonoBehaviour
 
     public void Send(int size, Node from, Node target, Edge edge)
     {
+        Edge = edge;
+
+        if (size == 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Team = from.GetTeam();
         Size = size;
         Target = target;
-        Edge = edge;
-        GetComponent<ArmyMove>().Send(from, target);
+        GetComponent<DisplayArmy>().Send(from, target);
     }
 
     void AttackedBy(int ArmySize)
     {
         Size -= ArmySize;
-        if (Size < 0)
+        if (Size <= 0)
             Destroy(gameObject);
     }
 
@@ -35,8 +42,8 @@ public class Army : MonoBehaviour
 
     public bool TryCollide(Army other)
     {
-        ArmyMove armyMove = GetComponent<ArmyMove>();
-        ArmyMove otherMove = other.GetComponent<ArmyMove>();
+        DisplayArmy armyMove = GetComponent<DisplayArmy>();
+        DisplayArmy otherMove = other.GetComponent<DisplayArmy>();
 
         if (armyMove.isColliding(otherMove))
         {

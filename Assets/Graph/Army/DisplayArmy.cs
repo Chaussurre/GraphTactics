@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArmyMove : MonoBehaviour
+public class DisplayArmy : MonoBehaviour
 {
     public Node From { get; private set; }
     public Node Target { get; private set; }
@@ -34,7 +34,7 @@ public class ArmyMove : MonoBehaviour
         }
 
         transform.position = Vector2.Lerp(From.transform.position, Target.transform.position, position);
-        GetComponentInChildren<Text>().text = Army.Size.ToString();
+        GetComponentInChildren<Text>().text =  DisplayNode.GetString(Army.Size);
     }
 
     public void Send(Node from, Node target)
@@ -46,7 +46,7 @@ public class ArmyMove : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().color = from.GetTeam().GetColor();
     }
 
-    public bool isColliding(ArmyMove other) //Only call on two armies on the same edge
+    public bool isColliding(DisplayArmy other) //Only call on two armies on the same edge
     {
         if (Army.Team == other.Army.Team) //Same team
             return false;

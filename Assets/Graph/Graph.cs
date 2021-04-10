@@ -6,8 +6,8 @@ public class Graph : MonoBehaviour
 {
     HashSet<Node> Nodes = new HashSet<Node>();
 
-    [SerializeField, Range(0.1f, 3f)]
-    float SoldierGrowth;
+    [SerializeField, Range(0.1f, 10f)]
+    float SoldierGrowth = 0.1f;
 
     private void Start()
     {

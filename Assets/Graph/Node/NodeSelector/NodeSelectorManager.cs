@@ -5,6 +5,14 @@ using UnityEngine;
 public class NodeSelectorManager : MonoBehaviour
 {
     NodeSelector Selected = null;
+    NodeSelector Targetted = null;
+
+    HumanPlayer player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<HumanPlayer>();
+    }
 
     public void TrySelect(NodeSelector selector)
     {
@@ -12,13 +20,14 @@ public class NodeSelectorManager : MonoBehaviour
             Selected = selector;
         else
         {
-            if (Selected.Node.TryAttack(selector.Node))
-                Selected = null;
+            if (Selected.Node.GetEdge(selector.Node) 
+                && player.Team.Nodes.Contains(Selected.Node))
+                Targetted = selector;
             else
                 Selected = selector;
         }
     }
-
+    
     private void Update()
     {
         if(Input.GetMouseButtonUp(1))
@@ -30,5 +39,20 @@ public class NodeSelectorManager : MonoBehaviour
     public bool IsSelected(NodeSelector selector)
     {
         return Selected == selector;
+    }
+
+    public bool GetAction(out Node From, out Node Target)
+    {
+        From = null;
+        Target = null;
+
+        if (Selected == null || Targetted == null)
+            return false;
+     
+        From = Selected.Node;
+        Target = Targetted.Node;
+        Selected = null;
+        Targetted = null;
+        return true;
     }
 }

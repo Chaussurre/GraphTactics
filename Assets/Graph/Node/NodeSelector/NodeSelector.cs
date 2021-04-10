@@ -5,21 +5,23 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D)), RequireComponent(typeof(SpriteRenderer))]
 public class NodeSelector : MonoBehaviour
 {
-    SpriteRenderer renderer;
+    SpriteRenderer Renderer;
 
     NodeSelectorManager SelectorManager;
     public Node Node { get; private set; }
 
     private void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        Renderer = GetComponent<SpriteRenderer>();
         Node = GetComponentInParent<Node>();
         SelectorManager = GetComponentInParent<NodeSelectorManager>();
     }
 
     private void Update()
     {
-        renderer.enabled = SelectorManager.IsSelected(this);
+        if (SelectorManager.IsSelected(this))
+            Renderer.color = Color.white;
+        else Renderer.color = Color.black;
     }
 
     private void OnMouseUpAsButton()

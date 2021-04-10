@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteAlways, RequireComponent(typeof(Node))]
-public class DisplayArmy : MonoBehaviour
+public class DisplayNode : MonoBehaviour
 {
     // Update is called once per frame
     private void Update()
@@ -30,6 +30,18 @@ public class DisplayArmy : MonoBehaviour
         if (text == null)
             return;
 
-        text.text = node.GetArmySize().ToString();
+        text.text = GetString(node.GetArmySize());
+    }
+
+    public static string GetString(int ArmySize)
+    {
+        if (ArmySize < 1000)
+            return ArmySize.ToString();
+        else
+        {
+            int left = ArmySize / 1000;
+            int right = (ArmySize % 1000) / 100;
+            return left.ToString() + "K" + right;
+        }
     }
 }

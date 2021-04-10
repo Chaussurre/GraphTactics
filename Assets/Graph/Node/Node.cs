@@ -5,13 +5,15 @@ using UnityEngine;
 public class Node : MonoBehaviour
 {
     [SerializeField, Range(0f, 100f, order = 0)]
-    float armySize;
+    float ArmySize;
 
     [SerializeField]
     Team Team;
 
     readonly public HashSet<Edge> Neighbourgs = new HashSet<Edge>();
 
+    private void OnEnable() => Team.Nodes.Add(this);
+    private void OnDisable() => Team.Nodes.Remove(this);
 
     public void AddNeighbourg(Edge edge)
     {
@@ -30,40 +32,58 @@ public class Node : MonoBehaviour
         else
             resultArmy += armySize;
 
-        if(resultArmy < 0)
+        if (resultArmy < 0)
         {
+            Team.Nodes.Remove(this);
             Team = attacker;
+            Team.Nodes.Add(this);
             resultArmy *= -1;
         }
 
-        this.armySize = resultArmy;
+        this.ArmySize = resultArmy;
     }
 
-    public bool TryAttack(Node target)
+    public bool TryAttack(Node target, int ArmySize)
     {
-        foreach (Edge edge in Neighbourgs)
-            if (edge.GetOtherNode(this) == target)
-            {
-                edge.SendArmy(this, GetArmySize());
-                armySize -= GetArmySize();
+        Edge edge = GetEdge(target);
+        if (edge != null)
+        {
+            edge.SendArmy(this, ArmySize);
+            this.ArmySize -= ArmySize;
 
-                return true;
-            }
+            return true;
+        }
         return false;
     }
 
     public void gainArmy(float gain)
     {
-        armySize += gain;
-        armySize = Mathf.Min(armySize, 100);
+        ArmySize += gain;
     }
 
     public int GetArmySize()
     {
-        return Mathf.FloorToInt(armySize);
+        return Mathf.FloorToInt(ArmySize);
     }
     public Team GetTeam()
     {
         return Team;
+    }
+
+    public Edge GetEdge(Node other)
+    {
+        foreach (Edge edge in Neighbourgs)
+            if (edge.GetOtherNode(this) == other)
+                return edge;
+        return null;
+    }
+
+    public Edge GetRandomEdge()
+    {
+        int x = Random.Range(0, Neighbourgs.Count);
+        foreach (Edge edge in Neighbourgs)
+            if (x-- == 0)
+                return edge;
+        return null;
     }
 }
