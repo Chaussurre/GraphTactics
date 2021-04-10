@@ -7,30 +7,23 @@ public class NodeSelector : MonoBehaviour
 {
     SpriteRenderer renderer;
 
-    static NodeSelector Selected = null;
+    NodeSelectorManager SelectorManager;
     public Node Node { get; private set; }
 
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         Node = GetComponentInParent<Node>();
+        SelectorManager = GetComponentInParent<NodeSelectorManager>();
     }
 
     private void Update()
     {
-        renderer.enabled = Selected == this;
+        renderer.enabled = SelectorManager.IsSelected(this);
     }
 
     private void OnMouseUpAsButton()
     {
-        if (Selected == null)
-            Selected = this;
-        else
-        {
-            if (Selected.Node.TryAttack(Node))
-                Selected = null;
-            else
-                Selected = this;
-        }
+        SelectorManager.TrySelect(this);
     }
 }
