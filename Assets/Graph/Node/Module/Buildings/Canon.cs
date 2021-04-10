@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Canon : Building
 {
-    [SerializeField, Range(0f, 1f)]
-    public float ZoneAlpha;
-
-    [SerializeField]
-    float range;
     [SerializeField, Range(0f, 100f)]
     float DamagePerSec;
 
@@ -17,7 +12,7 @@ public class Canon : Building
 
     public override void OnUpdate(float deltaTime, Node node)
     {
-        float rangeSqr = range * range;
+        float rangeSqr = Range * Range;
         if (Targetted == null 
             || (node.transform.position - Targetted.transform.position).sqrMagnitude > rangeSqr)
             Targetted = FindTarget(node.transform.position, rangeSqr, node.GetTeam());
