@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
-    HashSet<Node> Nodes = new HashSet<Node>();
+    readonly public HashSet<Node> Nodes = new HashSet<Node>();
+    readonly public HashSet<Army> Armies = new HashSet<Army>();
 
+    static public Graph Instance;
 
     private void Start()
     {
+        Instance = this;
+
         foreach (Edge edge in GetComponentsInChildren<Edge>())
             edge.Left.AddNeighbourg(edge);
 

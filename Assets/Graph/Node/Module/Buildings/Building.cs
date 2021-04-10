@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BuildingModule))]
 public abstract class Building : MonoBehaviour
 {
     [SerializeField]

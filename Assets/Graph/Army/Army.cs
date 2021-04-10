@@ -11,6 +11,9 @@ public class Army : MonoBehaviour
     Edge Edge;
     public int Size { get; private set; }
 
+    private void OnEnable() => Graph.Instance.Armies.Add(this);
+    private void OnDisable() => Graph.Instance.Armies.Remove(this);
+
     public void Send(int size, Node from, Node target, Edge edge)
     {
         Edge = edge;
@@ -27,7 +30,7 @@ public class Army : MonoBehaviour
         GetComponent<DisplayArmy>().Send(from, target);
     }
 
-    void AttackedBy(int ArmySize)
+    public void DealDamage(int ArmySize)
     {
         Size -= ArmySize;
         if (Size <= 0)
@@ -48,8 +51,8 @@ public class Army : MonoBehaviour
         if (armyMove.isColliding(otherMove))
         {
             int s = Size;
-            AttackedBy(other.Size);
-            other.AttackedBy(s);
+            DealDamage(other.Size);
+            other.DealDamage(s);
             return true;
         }
 
