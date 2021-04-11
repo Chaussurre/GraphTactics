@@ -10,6 +10,8 @@ public class Graph : MonoBehaviour
     static public Graph Instance;
     public NodeSelectorManager NodeSelectorManager { get; private set; }
 
+    public bool PauseGame = false;
+
     private void Start()
     {
         Instance = this;

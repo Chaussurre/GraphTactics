@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class Player : MonoBehaviour
 {
     public Team Team { get; private set; }
-
     protected virtual void Awake()
     {
         Team = GetComponent<Team>();
@@ -14,6 +13,9 @@ public abstract class Player : MonoBehaviour
 
     private void Update()
     {
+        if (Graph.Instance.PauseGame)
+            return;
+
         if (Action(out Node from, out Node Target))
             if (Team.Nodes.Contains(from))
                 from.TryAttack(Target, from.GetArmySize());

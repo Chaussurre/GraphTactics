@@ -16,6 +16,9 @@ public class NodeSelectorManager : MonoBehaviour
 
     public void TrySelect(NodeSelector selector)
     {
+        if (Graph.Instance.PauseGame)
+            return;
+
         if (Selected == null)
             Selected = selector;
         else

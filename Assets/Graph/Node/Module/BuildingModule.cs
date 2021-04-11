@@ -9,7 +9,6 @@ public class BuildingModule : MonoBehaviour
     public Building BuildingPrefab;
 
     Building Building = null;
-
     private void Start()
     {
         Node = GetComponentInParent<Node>();
@@ -17,6 +16,9 @@ public class BuildingModule : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Graph.Instance.PauseGame)
+            return;
+
         if (Building == null || BuildingPrefab == null || Building.GetType() != BuildingPrefab.GetType())
             ChangeBuilding();
 

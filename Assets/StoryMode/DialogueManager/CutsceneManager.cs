@@ -7,6 +7,8 @@ public class CutsceneManager : MonoBehaviour
 {
     [SerializeField]
     CutsceneEvent FirstEvent;
+    [SerializeField]
+    CutsceneEvent WinEvent;
 
     [SerializeField]
     Text TextDisplay;
@@ -39,10 +41,15 @@ public class CutsceneManager : MonoBehaviour
 
     public void ReadDialogue(Dialogue dialogue)
     {
+        TextDisplay.transform.parent.gameObject.SetActive(true);
         TextDisplay.text = dialogue.Text;
         SetCharacterTalking(dialogue.Character, dialogue.Left);
     }
 
+    public void HideDialogue()
+    {
+        TextDisplay.transform.parent.gameObject.SetActive(false);
+    }
     public void TriggerCutscene()
     {
         if (FirstEvent == null)
