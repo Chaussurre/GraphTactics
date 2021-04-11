@@ -8,10 +8,12 @@ public class Graph : MonoBehaviour
     readonly public HashSet<Army> Armies = new HashSet<Army>();
 
     static public Graph Instance;
+    public NodeSelectorManager NodeSelectorManager { get; private set; }
 
     private void Start()
     {
         Instance = this;
+        NodeSelectorManager = GetComponentInChildren<NodeSelectorManager>();
 
         foreach (Edge edge in GetComponentsInChildren<Edge>())
             edge.Left.AddNeighbourg(edge);

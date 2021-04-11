@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class HumanPlayer : Player
 {
-    NodeSelectorManager SelectorManager;
     BuildMenu BuildMenu;
     protected override void Awake()
     {
         base.Awake();
-        SelectorManager = FindObjectOfType<NodeSelectorManager>();
         BuildMenu = FindObjectOfType<BuildMenu>();
     }
 
     protected override bool Action(out Node from, out Node target)
     {
-        return SelectorManager.GetAction(out from, out target);
+        return Graph.Instance.NodeSelectorManager.GetAction(out from, out target);
     }
 
     protected override bool CreateBuilding(out Node node, out Building buildingPrefab)
     {
+        NodeSelectorManager SelectorManager = Graph.Instance.NodeSelectorManager;
         if (BuildMenu.GetCreatedBuilding(out buildingPrefab) && SelectorManager.Selected != null)
         {
             node = SelectorManager.Selected.Node;

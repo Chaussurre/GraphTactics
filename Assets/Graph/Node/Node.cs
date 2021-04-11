@@ -65,14 +65,16 @@ public class Node : MonoBehaviour
 
     public bool TryBuild(Building building)
     {
-        if (BuildingModule.BuildingPrefab == building)
-            return false;
-
-        if (ArmySize < building.GetCost())
+        if (!CanBuild(building))
             return false;
         ArmySize -= building.GetCost();
         BuildingModule.BuildingPrefab = building;
         return true;
+    }
+
+    public bool CanBuild(Building building)
+    {
+        return BuildingModule.BuildingPrefab != building && ArmySize >= building.GetCost();
     }
 
     public void gainArmy(float gain)
