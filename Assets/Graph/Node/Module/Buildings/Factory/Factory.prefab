@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc886b8dc2fe4140b6e9fc449fabc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 20
+  CostType: 0
   Range: 0
   ZoneAlpha: 0
   Icon: {fileID: 21300000, guid: 5860c39be7bd8fa42b3642c46bd0f64f, type: 3}

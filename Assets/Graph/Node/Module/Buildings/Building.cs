@@ -2,8 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CostType
+{
+    soldier,
+    ressources
+}
+
 public abstract class Building : MonoBehaviour
 {
+    [SerializeField]
+    int Cost;
+
+    [SerializeField]
+    CostType CostType;
+
     [SerializeField]
     public float Range;
 
@@ -18,5 +30,10 @@ public abstract class Building : MonoBehaviour
     public Sprite GetIcone()
     {
         return Icon;
+    }
+
+    public int GetCost()
+    {
+        return Cost;
     }
 }

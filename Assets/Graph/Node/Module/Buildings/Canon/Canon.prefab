@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212da54c957888b44af353e50ba9d591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 3.74
+  Cost: 15
+  CostType: 0
+  Range: 3.75
   ZoneAlpha: 0.5
   Icon: {fileID: 21300000, guid: 9f594c3c53d244a43810f0fab1f16f2c, type: 3}
   RayPrefab: {fileID: 4347234894952585912, guid: 6e4ff50ccabae8241bb114bc8dc261bb, type: 3}

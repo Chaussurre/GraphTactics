@@ -37,7 +37,7 @@ public class Node : MonoBehaviour
         if (Team != attacker)
             resultArmy -= armySize;
         else
-            resultArmy += armySize;
+            gainArmy(armySize);
 
         if (resultArmy < 0)
         {
@@ -63,6 +63,18 @@ public class Node : MonoBehaviour
         return false;
     }
 
+    public bool TryBuild(Building building)
+    {
+        if (BuildingModule.BuildingPrefab == building)
+            return false;
+
+        if (ArmySize < building.GetCost())
+            return false;
+        ArmySize -= building.GetCost();
+        BuildingModule.BuildingPrefab = building;
+        return true;
+    }
+
     public void gainArmy(float gain)
     {
         ArmySize += gain;
@@ -72,6 +84,7 @@ public class Node : MonoBehaviour
     {
         return Mathf.FloorToInt(ArmySize);
     }
+
     public Team GetTeam()
     {
         return Team;
