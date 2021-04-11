@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NodeSelectorManager : MonoBehaviour
 {
-    NodeSelector Selected = null;
+    public NodeSelector Selected { get; private set; } = null;
     NodeSelector Targetted = null;
 
     HumanPlayer player;
@@ -27,13 +27,17 @@ public class NodeSelectorManager : MonoBehaviour
                 Selected = selector;
         }
     }
+
+    public void UnSelect()
+    {
+        Targetted = null;
+        Selected = null;
+    }
     
     private void Update()
     {
-        if(Input.GetMouseButtonUp(1))
-        {
-            Selected = null;
-        }
+        if (Input.GetMouseButtonUp(1))
+            UnSelect();
     }
 
     public bool IsSelected(NodeSelector selector)
@@ -51,8 +55,7 @@ public class NodeSelectorManager : MonoBehaviour
      
         From = Selected.Node;
         Target = Targetted.Node;
-        Selected = null;
-        Targetted = null;
+        UnSelect();
         return true;
     }
 }

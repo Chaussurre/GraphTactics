@@ -10,10 +10,17 @@ public class Node : MonoBehaviour
     [SerializeField]
     Team Team;
 
+    public BuildingModule BuildingModule { get; private set; }
+
     readonly public HashSet<Edge> Neighbourgs = new HashSet<Edge>();
 
     private void OnEnable() => Team.Nodes.Add(this);
     private void OnDisable() => Team.Nodes.Remove(this);
+
+    private void Start()
+    {
+        BuildingModule = GetComponentInChildren<BuildingModule>();
+    }
 
     public void AddNeighbourg(Edge edge)
     {

@@ -69,4 +69,11 @@ public class SimpleAIPlayer : Player
 
         return result;
     }
+
+    protected override bool CreateBuilding(out Node node, out Building buildingPrefab)
+    {
+        node = null;
+        buildingPrefab = null;
+        return false; //TODO
+    }
 }

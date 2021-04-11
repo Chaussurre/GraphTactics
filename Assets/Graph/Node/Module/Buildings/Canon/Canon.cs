@@ -23,6 +23,12 @@ public class Canon : Building
         UpdateRay(node);
     }
 
+    private void OnDestroy()
+    {
+        if (Ray != null)
+            Destroy(Ray.gameObject);
+    }
+
     void UpdateRay(Node node)
     {
         if (Targetted == null)

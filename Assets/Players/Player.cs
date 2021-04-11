@@ -17,7 +17,12 @@ public abstract class Player : MonoBehaviour
         if (Action(out Node from, out Node Target))
             if (Team.Nodes.Contains(from))
                 from.TryAttack(Target, from.GetArmySize());
+
+        if (CreateBuilding(out Node node, out Building building))
+            node.BuildingModule.BuildingPrefab = building;
     }
 
     protected abstract bool Action(out Node from, out Node target);
+
+    protected abstract bool CreateBuilding(out Node node, out Building buildingPrefab);
 }

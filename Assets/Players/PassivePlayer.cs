@@ -11,4 +11,11 @@ public class PassivePlayer : Player
         target = null;
         return false;
     }
+
+    protected override bool CreateBuilding(out Node node, out Building buildingPrefab)
+    {
+        node = null;
+        buildingPrefab = null;
+        return false;
+    }
 }
