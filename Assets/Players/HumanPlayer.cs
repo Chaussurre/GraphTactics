@@ -6,9 +6,9 @@ public class HumanPlayer : Player
 {
     NodeSelectorManager SelectorManager;
     BuildMenu BuildMenu;
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         SelectorManager = FindObjectOfType<NodeSelectorManager>();
         BuildMenu = FindObjectOfType<BuildMenu>();
     }

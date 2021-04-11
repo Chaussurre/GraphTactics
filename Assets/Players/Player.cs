@@ -7,7 +7,7 @@ public abstract class Player : MonoBehaviour
 {
     public Team Team { get; private set; }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         Team = GetComponent<Team>();
     }

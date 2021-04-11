@@ -8,9 +8,13 @@ public class BuildMenu : MonoBehaviour
     List<Button> buttons = new List<Button>();
 
     Building BuildingCreated = null;
+
+    [SerializeField]
+    Image Panel;
     void Start()
     {
         buttons.AddRange(GetComponentsInChildren<Button>());
+        Panel.color = FindObjectOfType<HumanPlayer>().Team.GetColor(); 
     }
 
     public void CreateBuilding(Building building)
