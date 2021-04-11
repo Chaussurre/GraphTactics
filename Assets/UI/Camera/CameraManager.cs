@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
     private void Update()
     {
         Move();
-        //RecenterCamera();
+        RecenterCamera();
     }
 
     void Move()

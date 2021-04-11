@@ -23,7 +23,7 @@ public class SimpleAIPlayer : Player
             foreach(Edge edge in node.Neighbourgs)
             {
                 Node otherNode = edge.GetOtherNode(node);
-                if(otherNode.GetArmySize() < node.GetArmySize() - AttackDifference && otherNode.GetTeam() != Team)
+                if(otherNode.GetArmySize() <= node.GetArmySize() - AttackDifference && otherNode.GetTeam() != Team)
                 {
                     from = node;
                     target = otherNode;

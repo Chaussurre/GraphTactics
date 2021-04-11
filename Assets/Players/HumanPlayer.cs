@@ -18,6 +18,13 @@ public class HumanPlayer : Player
 
     protected override bool CreateBuilding(out Node node, out Building buildingPrefab)
     {
+        if (BuildMenu == null)
+        {
+            buildingPrefab = null;
+            node = null;
+            return false;
+        }
+
         NodeSelectorManager SelectorManager = Graph.Instance.NodeSelectorManager;
         if (BuildMenu.GetCreatedBuilding(out buildingPrefab) && SelectorManager.Selected != null)
         {
