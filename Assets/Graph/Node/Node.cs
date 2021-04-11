@@ -37,7 +37,7 @@ public class Node : MonoBehaviour
         if (Team != attacker)
             resultArmy -= armySize;
         else
-            gainArmy(armySize);
+            resultArmy += armySize;
 
         if (resultArmy < 0)
         {
@@ -47,7 +47,7 @@ public class Node : MonoBehaviour
             resultArmy *= -1;
         }
 
-        this.ArmySize = resultArmy;
+        ArmySize = resultArmy + ArmySize - GetArmySize();
     }
 
     public bool TryAttack(Node target, int ArmySize)
