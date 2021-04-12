@@ -7,7 +7,7 @@ public class CutsceneManager : MonoBehaviour
 {
     [SerializeField]
     CutsceneEvent FirstEvent;
-    [SerializeField]
+
     CutsceneEvent WinEvent;
 
     [SerializeField]
@@ -37,6 +37,7 @@ public class CutsceneManager : MonoBehaviour
     private void Start()
     {
         TriggerCutscene();
+        WinEvent = FindObjectOfType<VicoryDialogue>();
     }
 
     public void ReadDialogue(Dialogue dialogue)
@@ -75,8 +76,5 @@ public class CutsceneManager : MonoBehaviour
     {
         if (FirstEvent != null)
             Gizmos.DrawLine(Vector3.zero, FirstEvent.transform.position);
-
-        if (WinEvent != null)
-            Gizmos.DrawLine(Vector3.zero, WinEvent.transform.position);
     }
 }

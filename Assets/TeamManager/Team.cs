@@ -11,6 +11,9 @@ public class Team : MonoBehaviour
     Player Player;
     readonly public HashSet<Node> Nodes = new HashSet<Node>();
 
+    [SerializeField]
+    Faction Faction;
+
     private void Start()
     {
         Player = GetComponent<Player>();
@@ -21,6 +24,11 @@ public class Team : MonoBehaviour
     public Color GetColor()
     {
         return Color;
+    }
+
+    public Faction GetFaction()
+    {
+        return Faction;
     }
 
     public static Color TeamColor(Team team)

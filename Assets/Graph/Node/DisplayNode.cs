@@ -19,7 +19,10 @@ public class DisplayNode : MonoBehaviour
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         Team team = node.GetTeam();
         if (team != null)
+        {
             renderer.color = team.GetColor();
+            renderer.sprite = team.GetFaction().NodeShape;
+        }
         else
             renderer.color = Color.grey;
     }

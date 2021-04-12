@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D)), RequireComponent(typeof(SpriteRenderer))]
+[ExecuteAlways, RequireComponent(typeof(Collider2D)), RequireComponent(typeof(SpriteRenderer))]
 public class NodeSelector : MonoBehaviour
 {
     SpriteRenderer Renderer;
@@ -22,6 +22,7 @@ public class NodeSelector : MonoBehaviour
         if (SelectorManager.IsSelected(this))
             Renderer.color = Color.white;
         else Renderer.color = Color.black;
+        Renderer.sprite = Node.GetTeam().GetFaction().NodeShape;
     }
 
     private void OnMouseUpAsButton()
