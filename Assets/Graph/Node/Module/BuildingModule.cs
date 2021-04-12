@@ -22,6 +22,9 @@ public class BuildingModule : MonoBehaviour
         if (Building == null || BuildingPrefab == null || Building.GetType() != BuildingPrefab.GetType())
             ChangeBuilding();
 
+        if (Node.GetTeam().BuildingsStopped)
+            return;
+
         Building?.OnUpdate(Time.fixedDeltaTime, Node);
     }
 

@@ -10,6 +10,7 @@ public class SceneChange : CutsceneEvent
 
     public override void Trigger()
     {
-        SceneManager.LoadScene(Scene); 
+        if (Scene.Length > 0)
+            SceneManager.LoadScene(Scene);
     }
 }

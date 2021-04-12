@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Team : MonoBehaviour
 {
+    public bool BuildingsStopped = false;
     [SerializeField]
     Color Color;
 

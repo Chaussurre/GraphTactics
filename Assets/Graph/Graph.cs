@@ -12,9 +12,11 @@ public class Graph : MonoBehaviour
 
     public bool PauseGame = false;
 
+    private void OnEnable() => Instance = this;
+    private void OnDisable() => Instance = null;
+
     private void Start()
     {
-        Instance = this;
         NodeSelectorManager = GetComponentInChildren<NodeSelectorManager>();
 
         foreach (Edge edge in GetComponentsInChildren<Edge>())
@@ -22,5 +24,20 @@ public class Graph : MonoBehaviour
 
         foreach (Node node in GetComponentsInChildren<Node>())
             Nodes.Add(node);
+    }
+
+    public Team GetWinner()
+    {
+        Team winner = null;
+
+        foreach(Node node in Nodes)
+        {
+            if (winner == null)
+                winner = node.GetTeam();
+
+            if (winner != node.GetTeam())
+                return null;
+        }
+        return winner;
     }
 }

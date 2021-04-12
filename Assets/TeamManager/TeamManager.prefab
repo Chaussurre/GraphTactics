@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c29599dd017544bf2b9b80abca1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingsStopped: 0
   Color: {r: 1, g: 0.40943396, b: 0.40943396, a: 1}
 --- !u!114 &6203059299094762197
 MonoBehaviour:
@@ -151,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c29599dd017544bf2b9b80abca1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingsStopped: 0
   Color: {r: 0.97071093, g: 1, b: 0.390566, a: 1}
 --- !u!114 &1958067718537347686
 MonoBehaviour:
@@ -210,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c29599dd017544bf2b9b80abca1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingsStopped: 0
   Color: {r: 0.56037736, g: 0.65174997, b: 1, a: 1}
 --- !u!114 &60527915982742805
 MonoBehaviour:
@@ -269,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c29599dd017544bf2b9b80abca1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingsStopped: 0
   Color: {r: 0.45660377, g: 1, b: 0.45661983, a: 1}
 --- !u!114 &4789197758344051677
 MonoBehaviour:
@@ -294,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 60527917374565801}
   - component: {fileID: 60527917374565803}
-  - component: {fileID: 5892096997008752748}
+  - component: {fileID: 4175366748328134814}
   m_Layer: 0
   m_Name: TeamNeutral
   m_TagString: Untagged
@@ -328,8 +332,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c29599dd017544bf2b9b80abca1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingsStopped: 0
   Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
---- !u!114 &5892096997008752748
+--- !u!114 &4175366748328134814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,8 +343,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 60527917374565806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82188133b4075a948b90a6684560c72d, type: 3}
+  m_Script: {fileID: 11500000, guid: 42299315f277dda45a05c08d0dba580d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefenseSizeTrigger: 5
-  AttackDifference: 15

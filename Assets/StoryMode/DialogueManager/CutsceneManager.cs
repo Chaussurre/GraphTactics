@@ -63,11 +63,20 @@ public class CutsceneManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
             TriggerCutscene();
+
+        if(Graph.Instance != null && Graph.Instance.GetWinner() != null)
+        {
+            FirstEvent = WinEvent;
+            TriggerCutscene();
+        }
     }
 
     private void OnDrawGizmos()
     {
         if (FirstEvent != null)
             Gizmos.DrawLine(Vector3.zero, FirstEvent.transform.position);
+
+        if (WinEvent != null)
+            Gizmos.DrawLine(Vector3.zero, WinEvent.transform.position);
     }
 }
