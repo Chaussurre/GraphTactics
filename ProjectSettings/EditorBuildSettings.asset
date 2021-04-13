@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Campaign/Mission2.unity
     guid: fd923f687f19a914ba536304ef00ac93
+  - enabled: 1
+    path: Assets/Scenes/Campaign/Mission3.unity
+    guid: 306b02813e22e7b439cc029a93a746b6
+  - enabled: 1
+    path: Assets/Scenes/Campaign/Mission4.unity
+    guid: b4bb080995ae94846947b84e89aa9a9f
+  - enabled: 1
+    path: Assets/Scenes/Campaign/Mission5.unity
+    guid: b2c2674807a8ca2449084c5e08c2630f
   m_configObjects: {}

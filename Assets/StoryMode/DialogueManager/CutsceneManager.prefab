@@ -301,7 +301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstEvent: {fileID: 0}
-  WinEvent: {fileID: 0}
   TextDisplay: {fileID: 432435119}
   LeftCharacter: {fileID: 155633300}
   RightCharacter: {fileID: 1140681543}
@@ -443,7 +442,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1763001877
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6807817195504407693

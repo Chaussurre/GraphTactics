@@ -8,6 +8,9 @@ public class SimpleAIPlayer : Player
     int DefenseSizeTrigger;
     [SerializeField]
     int AttackDifference;
+
+    Node lastActionFrom;
+
     protected override bool Action(out Node from, out Node target)
     {
         HashSet<Node> PotentialAttackers = new HashSet<Node>();
@@ -17,7 +20,7 @@ public class SimpleAIPlayer : Player
             if (SeeEnemy(node))
                 PotentialAttackers.Add(node);
             else
-                PotentialDefenders.Add(node);
+               PotentialDefenders.Add(node);
 
         foreach(Node node in PotentialAttackers)
             foreach(Edge edge in node.Neighbourgs)
@@ -31,13 +34,19 @@ public class SimpleAIPlayer : Player
                 }
             }
 
+        
         foreach(Node node in PotentialDefenders)
             if(node.GetArmySize() >= DefenseSizeTrigger)
             {
+                if (node == lastActionFrom)
+                    continue;
+
                 from = node;
-                target = GreatestNeighbourg(node);
+                lastActionFrom = node;
+                target = FirstStep(from, GreatestNode(PotentialAttackers));
                 return true;
             }
+            
 
         from = null;
         target = null;
@@ -53,21 +62,40 @@ public class SimpleAIPlayer : Player
         return false;
     }
 
-    private Node GreatestNeighbourg(Node node)
+    static private Node GreatestNode(HashSet<Node> nodes)
     {
         Node result = null;
         float size = -1;
-        foreach(Edge edge in node.Neighbourgs)
-        {
-            Node other = edge.GetOtherNode(node);
-            if (other.GetArmySize() > size)
+        foreach(Node node in nodes)
+            if (node.GetArmySize() > size)
             {
-                size = other.GetArmySize();
-                result = other;
+                size = node.GetArmySize();
+                result = node;
+            }
+
+        return result;
+    }
+
+    private Node FirstStep(Node from, Node target)
+    {
+        List<Node> NodeSeen = new List<Node>() { target };
+
+        while(NodeSeen.Count > 0)
+        {
+            Node node = NodeSeen[0];
+            NodeSeen.RemoveAt(0);
+
+            foreach(Edge edge in node.Neighbourgs)
+            {
+                Node other = edge.GetOtherNode(node);
+                if (other == from)
+                    return node;
+                if (other.GetTeam() == target.GetTeam())
+                    NodeSeen.Add(other);
             }
         }
 
-        return result;
+        return null; //No path found ?
     }
 
     protected override bool CreateBuilding(out Node node, out Building buildingPrefab)

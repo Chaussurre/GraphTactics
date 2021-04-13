@@ -21,7 +21,8 @@ public abstract class Player : MonoBehaviour
                 from.TryAttack(Target, from.GetArmySize());
 
         if (CreateBuilding(out Node node, out Building building))
-            node.TryBuild(building);
+            if (Team.Nodes.Contains(node))
+                node.TryBuild(building);
     }
 
     protected abstract bool Action(out Node from, out Node target);
