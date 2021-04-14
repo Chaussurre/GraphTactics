@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660b03e88012167478ae915536d76f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArrowPrefab: {fileID: 1231538553177649442, guid: f0d54a7321ca53e4eaf740243ba030f7, type: 3}
 --- !u!1 &2541527860618921458
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +413,7 @@ Transform:
   m_GameObject: {fileID: 4653752057904799720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 1671071576168626198}
   m_RootOrder: 0
@@ -458,7 +459,7 @@ SpriteRenderer:
   m_SortingLayer: -2
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: b7239ff789c3b5748aab86243423d57c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

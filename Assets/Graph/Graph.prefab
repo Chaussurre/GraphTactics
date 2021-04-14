@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bdf87b8c3ba6849a24b884f7aa82c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PauseGame: 0
 --- !u!1 &8347041003533882664
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,6 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8347041003533882665}
   - component: {fileID: 8347041003533882670}
+  - component: {fileID: 2895688671195915347}
   m_Layer: 0
   m_Name: Node Selector Manager
   m_TagString: Untagged
@@ -88,6 +90,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c9fb5e0b619304fa8990107a36ca04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoSendManager: {fileID: 0}
+--- !u!114 &2895688671195915347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347041003533882664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a0d1a73290d244aa6b15c022d02e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowPrefab: {fileID: 1231538553177649442, guid: f0d54a7321ca53e4eaf740243ba030f7, type: 3}
 --- !u!1 &8347041003576278515
 GameObject:
   m_ObjectHideFlags: 0

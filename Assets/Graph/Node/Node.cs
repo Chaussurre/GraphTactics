@@ -14,6 +14,8 @@ public class Node : MonoBehaviour
 
     readonly public HashSet<Edge> Neighbourgs = new HashSet<Edge>();
 
+    readonly public HashSet<Edge> AutoSend = new HashSet<Edge>();
+
     private void OnEnable() => Team.Nodes.Add(this);
     private void OnDisable() => Team.Nodes.Remove(this);
 
@@ -28,26 +30,39 @@ public class Node : MonoBehaviour
         edge.GetOtherNode(this).Neighbourgs.Add(edge);
     }
 
-
-    public void Attacked(Team attacker, int armySize)
+    public void Attacked(Team attacker, int enemyArmy)
     {
-        int defendingArmy = GetArmySize();
-        int resultArmy = defendingArmy;
-
         if (Team != attacker)
-            resultArmy -= armySize;
+            ArmySize -= enemyArmy;
         else
-            resultArmy += armySize;
-
-        if (resultArmy < 0)
         {
-            Team.Nodes.Remove(this);
-            Team = attacker;
-            Team.Nodes.Add(this);
-            resultArmy *= -1;
+            gainArmy(enemyArmy);
+            return;
         }
 
-        ArmySize = resultArmy + ArmySize - GetArmySize();
+        if (ArmySize < 0)
+        {
+            AutoSend.Clear();
+            Team.Nodes.Remove(this);
+            Team = attacker;
+            attacker.Nodes.Add(this);
+            ArmySize *= -1;
+        }
+    }
+
+    public void TrySetAutoSend(Node node)
+    {
+        Edge edge = GetEdge(node);
+        if (edge != null)
+        {
+            if (AutoSend.Contains(edge))
+                AutoSend.Remove(edge);
+            else
+            {
+                AutoSend.Add(edge);
+                TryAttack(node, GetArmySize());
+            }
+        }
     }
 
     public bool TryAttack(Node target, int ArmySize)
@@ -80,6 +95,13 @@ public class Node : MonoBehaviour
     public void gainArmy(float gain)
     {
         ArmySize += gain;
+        if (AutoSend.Count > 0)
+        {
+            int sendArmy = GetArmySize() / AutoSend.Count;
+            if (sendArmy >= 1)
+                foreach (Edge edge in AutoSend)
+                    TryAttack(edge.GetOtherNode(this), sendArmy);
+        }
     }
 
     public int GetArmySize()

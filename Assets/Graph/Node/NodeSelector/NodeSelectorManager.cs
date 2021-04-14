@@ -6,12 +6,15 @@ public class NodeSelectorManager : MonoBehaviour
 {
     public NodeSelector Selected { get; private set; } = null;
     NodeSelector Targetted = null;
+    [HideInInspector]
+    public NodeAutoSendManager AutoSendManager;
 
     HumanPlayer player;
 
     private void Start()
     {
         player = FindObjectOfType<HumanPlayer>();
+        AutoSendManager = GetComponent<NodeAutoSendManager>();
     }
 
     public void TrySelect(NodeSelector selector)
@@ -36,7 +39,7 @@ public class NodeSelectorManager : MonoBehaviour
         Targetted = null;
         Selected = null;
     }
-    
+
     private void Update()
     {
         if (Input.GetMouseButtonUp(1))

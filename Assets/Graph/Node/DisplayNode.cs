@@ -7,17 +7,49 @@ using UnityEngine.UI;
 public class DisplayNode : MonoBehaviour
 {
     // Update is called once per frame
-    private void Update()
+
+    [SerializeField]
+    DragNDropArrow ArrowPrefab;
+    Node Node;
+
+    List<DragNDropArrow> arrows = new List<DragNDropArrow>();
+    private void Start()
     {
-        Node node = GetComponent<Node>();
-        DisplayArmySize(node);
-        DisplayTeam(node);
+        Node = GetComponent<Node>();
     }
 
-    void DisplayTeam(Node node)
+    private void Update()
+    {
+        DisplayArmySize();
+        DisplayTeam();
+        DisplayAutoSend();
+    }
+
+    void DisplayAutoSend()
+    {
+        while(arrows.Count < Node.AutoSend.Count)
+            arrows.Add(Instantiate(ArrowPrefab, transform.parent));
+
+        while(arrows.Count > Node.AutoSend.Count)
+        {
+            DragNDropArrow arrow = arrows[arrows.Count - 1];
+            Destroy(arrow.gameObject);
+            arrows.RemoveAt(arrows.Count - 1);
+        }
+
+        int i = 0;
+        foreach(Edge edge in Node.AutoSend)
+        {
+            Color color = Node.GetTeam().GetColor();
+            NodeSelector selector = edge.GetOtherNode(Node).GetComponentInChildren<NodeSelector>();
+            arrows[i++].SetPosition(transform.position, selector, color);
+        }
+    }
+
+    void DisplayTeam()
     {
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        Team team = node.GetTeam();
+        Team team = Node.GetTeam();
         if (team != null)
         {
             renderer.color = team.GetColor();
@@ -27,13 +59,13 @@ public class DisplayNode : MonoBehaviour
             renderer.color = Color.grey;
     }
 
-    void DisplayArmySize(Node node)
+    void DisplayArmySize()
     {
         Text text = GetComponentInChildren<Text>();
         if (text == null)
             return;
 
-        text.text = GetString(node.GetArmySize());
+        text.text = GetString(Node.GetArmySize());
     }
 
     public static string GetString(int ArmySize)
