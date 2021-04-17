@@ -46,7 +46,7 @@ public class NodeAutoSendManager : MonoBehaviour
         Vector2 start = ArrowStart.transform.position;
 
         if (ArrowEnd != null && ArrowStart.Node.GetEdge(ArrowEnd.Node) != null)
-            Arrow.SetPosition(start, ArrowEnd, color);
+            Arrow.SetPosition(ArrowStart.Node, ArrowEnd, color);
         else
             Arrow.SetPosition(start, Camera.main.ScreenToWorldPoint(Input.mousePosition), color);
     }

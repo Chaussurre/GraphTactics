@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DragNDropArrow : MonoBehaviour
 {
+    AutoSender AutoSender = null;
+    Node Target;
+
     public void SetPosition(Vector2 from, Vector2 to, Color color)
     {
         GetComponent<SpriteRenderer>().color = color;
@@ -13,9 +16,20 @@ public class DragNDropArrow : MonoBehaviour
         transform.position = to;
     }
 
-    public void SetPosition(Vector2 from, NodeSelector to, Color color)
+    public void SetPosition(Node from, NodeSelector to, Color color)
     {
-        Vector2 Endpoint = to.GetComponent<Collider2D>().ClosestPoint(from);
-        SetPosition(from, Endpoint, color);
+        AutoSender = from.AutoSender;
+        Target = to.Node;
+
+        Vector2 Endpoint = to.GetComponent<Collider2D>().ClosestPoint(from.transform.position);
+        SetPosition(from.transform.position, Endpoint, color);
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        if (AutoSender == null || Target == null)
+            return;
+
+        AutoSender.Targets.Remove(Target);
     }
 }

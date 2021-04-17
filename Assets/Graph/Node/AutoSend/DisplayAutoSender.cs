@@ -39,7 +39,7 @@ public class DisplayAutoSender : MonoBehaviour
         {
             Color color = AutoSender.Node.GetTeam().GetColor();
             NodeSelector selector = target.GetComponentInChildren<NodeSelector>();
-            arrows[i++].SetPosition(transform.position, selector, color);
+            arrows[i++].SetPosition(AutoSender.Node, selector, color);
         }
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 474287422113383119}
   - component: {fileID: 5828397097650687405}
   - component: {fileID: 1231538553177649442}
+  - component: {fileID: 531621755683098670}
   m_Layer: 0
   m_Name: DragNDropArrow
   m_TagString: Untagged
@@ -96,6 +97,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425aa831af394d84a9d0b7e706306d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &531621755683098670
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870634673050708391}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 1, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.2882304, y: 0.2820053}
+      - {x: -0.2882304, y: 0.1481783}
+      - {x: -0.599052, y: 0.14817834}
+      - {x: -0.59905195, y: -0.15055084}
+      - {x: -0.28823042, y: -0.1505508}
+      - {x: -0.2882304, y: -0.2914064}
+      - {x: 0, y: 0}
 --- !u!1 &8348014225671243413
 GameObject:
   m_ObjectHideFlags: 0
