@@ -31,7 +31,7 @@ public abstract class Player : MonoBehaviour
         {//Does the player wants to set a flow of unit ? HUMAN ONLY
             if (SetFlux(out Node from, out Node target))
                 if (Team.Nodes.Contains(from))
-                    from.TrySetAutoSend(target);
+                    from.AutoSender.TrySetAutoSend(target);
         }
     }
 

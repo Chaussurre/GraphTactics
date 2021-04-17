@@ -14,13 +14,14 @@ public class Node : MonoBehaviour
 
     readonly public HashSet<Edge> Neighbourgs = new HashSet<Edge>();
 
-    readonly public HashSet<Edge> AutoSend = new HashSet<Edge>();
+    public AutoSender AutoSender { get; private set; }
 
     private void OnEnable() => Team.Nodes.Add(this);
     private void OnDisable() => Team.Nodes.Remove(this);
 
     private void Start()
     {
+        AutoSender = GetComponent<AutoSender>();
         BuildingModule = GetComponentInChildren<BuildingModule>();
     }
 
@@ -42,31 +43,11 @@ public class Node : MonoBehaviour
 
         if (ArmySize < 0)
         {
-            AutoSend.Clear();
+            AutoSender.Targets.Clear();
             Team.Nodes.Remove(this);
             Team = attacker;
             attacker.Nodes.Add(this);
             ArmySize *= -1;
-        }
-    }
-
-    public void TrySetAutoSend(Node node)
-    {
-        Edge edge = GetEdge(node);
-        if (edge != null)
-        {
-            if (AutoSend.Contains(edge))
-                AutoSend.Remove(edge); //Setting an auto send a second time cancel the first
-            else
-            {
-                if (node.AutoSend.Contains(edge))
-                    node.AutoSend.Remove(edge); //Setting two auto send in opposite directions cancel both
-                else
-                {
-                    AutoSend.Add(edge);
-                    TryAttack(node, GetArmySize());
-                }
-            }
         }
     }
 
@@ -100,13 +81,6 @@ public class Node : MonoBehaviour
     public void gainArmy(float gain)
     {
         ArmySize += gain;
-        if (AutoSend.Count > 0)
-        {
-            int sendArmy = GetArmySize() / AutoSend.Count;
-            if (sendArmy >= 1)
-                foreach (Edge edge in AutoSend)
-                    TryAttack(edge.GetOtherNode(this), sendArmy);
-        }
     }
 
     public int GetArmySize()

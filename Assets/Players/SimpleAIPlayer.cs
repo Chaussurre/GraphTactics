@@ -85,6 +85,9 @@ public class SimpleAIPlayer : Player
             Node node = NodeSeen[0];
             NodeSeen.RemoveAt(0);
 
+            if (node == null)
+                continue;
+
             foreach(Edge edge in node.Neighbourgs)
             {
                 Node other = edge.GetOtherNode(node);

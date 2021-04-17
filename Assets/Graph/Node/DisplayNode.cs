@@ -8,11 +8,8 @@ public class DisplayNode : MonoBehaviour
 {
     // Update is called once per frame
 
-    [SerializeField]
-    DragNDropArrow ArrowPrefab;
     Node Node;
 
-    List<DragNDropArrow> arrows = new List<DragNDropArrow>();
     private void Start()
     {
         Node = GetComponent<Node>();
@@ -22,28 +19,6 @@ public class DisplayNode : MonoBehaviour
     {
         DisplayArmySize();
         DisplayTeam();
-        DisplayAutoSend();
-    }
-
-    void DisplayAutoSend()
-    {
-        while(arrows.Count < Node.AutoSend.Count)
-            arrows.Add(Instantiate(ArrowPrefab, transform.parent));
-
-        while(arrows.Count > Node.AutoSend.Count)
-        {
-            DragNDropArrow arrow = arrows[arrows.Count - 1];
-            Destroy(arrow.gameObject);
-            arrows.RemoveAt(arrows.Count - 1);
-        }
-
-        int i = 0;
-        foreach(Edge edge in Node.AutoSend)
-        {
-            Color color = Node.GetTeam().GetColor();
-            NodeSelector selector = edge.GetOtherNode(Node).GetComponentInChildren<NodeSelector>();
-            arrows[i++].SetPosition(transform.position, selector, color);
-        }
     }
 
     void DisplayTeam()
