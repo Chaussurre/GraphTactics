@@ -11,6 +11,13 @@ public class NodeAutoSendManager : MonoBehaviour
     NodeSelector ArrowStart = null;
     NodeSelector ArrowEnd = null;
 
+    NodeSelectorManager SelectorManager;
+
+    private void Start()
+    {
+        SelectorManager = GetComponent<NodeSelectorManager>();
+    }
+
     private void Update()
     {
         UpdateArrow();
@@ -21,16 +28,15 @@ public class NodeAutoSendManager : MonoBehaviour
         if (!Input.GetMouseButton(0) || ArrowStart == ArrowEnd)
         {
             if (Arrow != null)
-            {
-                if (ArrowStart != null && ArrowEnd != null && ArrowStart.Node.GetEdge(ArrowEnd.Node) != null)
-                    ArrowStart.Node.TrySetAutoSend(ArrowEnd.Node);
                 Destroy(Arrow.gameObject);
-            }
             Arrow = null;
             return;
         }
 
         if (ArrowStart == null)
+            return;
+
+        if (!SelectorManager.Player.Team.Nodes.Contains(ArrowStart.Node))
             return;
 
         if (Arrow == null)
@@ -53,5 +59,23 @@ public class NodeAutoSendManager : MonoBehaviour
     public void SetArrowEnd(NodeSelector selector)
     {
         ArrowEnd = selector;
+    }
+
+    public bool GetAutoSend(out Node from, out Node target)
+    {
+        if (!Input.GetMouseButton(0) &&
+            ArrowStart != null && ArrowEnd != null &&
+            ArrowStart.Node.GetEdge(ArrowEnd.Node) != null)
+        {
+            from = ArrowStart.Node;
+            target = ArrowEnd.Node;
+            ArrowStart = null;
+            ArrowEnd = null;
+            return true;
+        }
+
+        from = null;
+        target = null;
+        return false;
     }
 }

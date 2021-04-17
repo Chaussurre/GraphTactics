@@ -162,6 +162,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6e03e2dd59b0c47a80db6f55469adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &565058616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6162923495458650905, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+  m_PrefabInstance: {fileID: 1245327232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43b1d661137dd5c47952d96242ce9292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &645883221 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 60527915982742762, guid: 38db7a85229b64547a009889686c9a3e, type: 3}
@@ -805,7 +816,7 @@ PrefabInstance:
     - target: {fileID: 2041304460890060389, guid: 399c6f3e9124a96409c5e460ca2782c3, type: 3}
       propertyPath: FirstEvent
       value: 
-      objectReference: {fileID: 686081421}
+      objectReference: {fileID: 565058616}
     - target: {fileID: 2041304460890060389, guid: 399c6f3e9124a96409c5e460ca2782c3, type: 3}
       propertyPath: WinEvent
       value: 
@@ -864,6 +875,72 @@ PrefabInstance:
       objectReference: {fileID: 1811203858}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 399c6f3e9124a96409c5e460ca2782c3, type: 3}
+--- !u!1001 &1245327232
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 981499164}
+    m_Modifications:
+    - target: {fileID: 98267900845915408, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_Name
+      value: Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 6162923495458650905, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: Next
+      value: 
+      objectReference: {fileID: 686081421}
+    - target: {fileID: 6162923495458650905, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: Text
+      value: Click on your node (here in yellow) to select it, then click on your
+        opponent's node to attack it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317292151302696944, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a364ce8041602aa4b96b7fd22001167e, type: 3}
 --- !u!114 &1648439653 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -1141204921771979262, guid: 8c6d85f7269c3294083214d55fd871a4, type: 3}
@@ -1364,11 +1441,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1035544525542961849, guid: 096399ed59c0bd944b8cced8c5c7ff3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.38
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1035544525542961849, guid: 096399ed59c0bd944b8cced8c5c7ff3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.49
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 1035544525542961849, guid: 096399ed59c0bd944b8cced8c5c7ff3f, type: 3}
       propertyPath: m_LocalPosition.z

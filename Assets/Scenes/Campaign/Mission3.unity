@@ -924,7 +924,7 @@ PrefabInstance:
       objectReference: {fileID: 908748316}
     - target: {fileID: -1141204921771979262, guid: 8c6d85f7269c3294083214d55fd871a4, type: 3}
       propertyPath: ArmySize
-      value: 80
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1571356061316181797, guid: 8c6d85f7269c3294083214d55fd871a4, type: 3}
       propertyPath: m_Sprite
@@ -1428,6 +1428,10 @@ PrefabInstance:
       propertyPath: Faction
       value: 
       objectReference: {fileID: 908748317}
+    - target: {fileID: 60527915982742805, guid: 38db7a85229b64547a009889686c9a3e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 60527917374565803, guid: 38db7a85229b64547a009889686c9a3e, type: 3}
       propertyPath: BuildingsStopped
       value: 1
@@ -1470,7 +1474,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 60527915982742762, guid: 38db7a85229b64547a009889686c9a3e, type: 3}
   m_PrefabInstance: {fileID: 908748312}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2009864871}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a4c29599dd017544bf2b9b80abca1fb, type: 3}
@@ -2490,6 +2494,23 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 370443254629048408, guid: 9b349cf5ff14eb84fb48da09120b2ac4, type: 3}
   m_PrefabInstance: {fileID: 1930739192}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2009864871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 60527915982742760, guid: 38db7a85229b64547a009889686c9a3e, type: 3}
+  m_PrefabInstance: {fileID: 908748312}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2009864874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009864871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42299315f277dda45a05c08d0dba580d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2046533491
 PrefabInstance:
   m_ObjectHideFlags: 0

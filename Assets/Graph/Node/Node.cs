@@ -56,11 +56,16 @@ public class Node : MonoBehaviour
         if (edge != null)
         {
             if (AutoSend.Contains(edge))
-                AutoSend.Remove(edge);
+                AutoSend.Remove(edge); //Setting an auto send a second time cancel the first
             else
             {
-                AutoSend.Add(edge);
-                TryAttack(node, GetArmySize());
+                if (node.AutoSend.Contains(edge))
+                    node.AutoSend.Remove(edge); //Setting two auto send in opposite directions cancel both
+                else
+                {
+                    AutoSend.Add(edge);
+                    TryAttack(node, GetArmySize());
+                }
             }
         }
     }

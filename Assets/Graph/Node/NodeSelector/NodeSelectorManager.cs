@@ -9,11 +9,11 @@ public class NodeSelectorManager : MonoBehaviour
     [HideInInspector]
     public NodeAutoSendManager AutoSendManager;
 
-    HumanPlayer player;
+    public HumanPlayer Player;
 
     private void Start()
     {
-        player = FindObjectOfType<HumanPlayer>();
+        Player = FindObjectOfType<HumanPlayer>();
         AutoSendManager = GetComponent<NodeAutoSendManager>();
     }
 
@@ -27,7 +27,7 @@ public class NodeSelectorManager : MonoBehaviour
         else
         {
             if (Selected.Node.GetEdge(selector.Node) 
-                && player.Team.Nodes.Contains(Selected.Node))
+                && Player.Team.Nodes.Contains(Selected.Node))
                 Targetted = selector;
             else
                 Selected = selector;

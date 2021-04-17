@@ -35,4 +35,9 @@ public class HumanPlayer : Player
         node = null;
         return false;
     }
+
+    protected override bool SetFlux(out Node from, out Node target)
+    {
+        return Graph.Instance.NodeSelectorManager.AutoSendManager.GetAutoSend(out from, out target);
+    }
 }
