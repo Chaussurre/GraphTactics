@@ -8,8 +8,8 @@ public class NodeAutoSendManager : MonoBehaviour
     DragNDropArrow ArrowPrefab;
     DragNDropArrow Arrow = null;
 
-    NodeSelector ArrowStart = null;
     NodeSelector ArrowEnd = null;
+    bool Autosending;
 
     NodeSelectorManager SelectorManager;
 
@@ -25,18 +25,18 @@ public class NodeAutoSendManager : MonoBehaviour
 
     void UpdateArrow()
     {
+        NodeSelector ArrowStart = Graph.Instance.NodeSelectorManager.Selected;
+
         if (!Input.GetMouseButton(0) || ArrowStart == ArrowEnd)
         {
             if (Arrow != null)
                 Destroy(Arrow.gameObject);
             Arrow = null;
+            Autosending = false;
             return;
         }
 
-        if (ArrowStart == null)
-            return;
-
-        if (!SelectorManager.Player.Team.Nodes.Contains(ArrowStart.Node))
+        if (!CanDisplayArrow(ArrowStart))
             return;
 
         if (Arrow == null)
@@ -51,9 +51,23 @@ public class NodeAutoSendManager : MonoBehaviour
             Arrow.SetPosition(start, Camera.main.ScreenToWorldPoint(Input.mousePosition), color);
     }
 
-    public void SetArrowStart(NodeSelector selector)
+    bool CanDisplayArrow(NodeSelector ArrowStart)
     {
-        ArrowStart = selector;
+        if (ArrowStart == null)
+            return false;
+
+        if (!Autosending)
+            return false;
+
+        if (!SelectorManager.Player.Team.Nodes.Contains(ArrowStart.Node))
+            return false;
+
+        return true;
+    }
+
+    public void StartAutoSending()
+    {
+        Autosending = true;
     }
 
     public void SetArrowEnd(NodeSelector selector)
@@ -63,13 +77,14 @@ public class NodeAutoSendManager : MonoBehaviour
 
     public bool GetAutoSend(out Node from, out Node target)
     {
+        NodeSelector ArrowStart = Graph.Instance.NodeSelectorManager.Selected;
         if (!Input.GetMouseButton(0) &&
             ArrowStart != null && ArrowEnd != null &&
             ArrowStart.Node.GetEdge(ArrowEnd.Node) != null)
         {
             from = ArrowStart.Node;
             target = ArrowEnd.Node;
-            ArrowStart = null;
+            Graph.Instance.NodeSelectorManager.UnSelect();
             ArrowEnd = null;
             return true;
         }

@@ -33,7 +33,9 @@ public class NodeSelector : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        SelectorManager.AutoSendManager.SetArrowStart(this);
+        SelectorManager.TrySelect(this);
+        SelectorManager.AutoSendManager.StartAutoSending();
+        //SelectorManager.AutoSendManager.SetArrowStart(this);
     }
 
     private void OnMouseOver()
