@@ -19,7 +19,8 @@ public class BuildButton : MonoBehaviour
         if (Graph.Instance != null)
         {
             NodeSelector Selected = Graph.Instance.NodeSelectorManager.Selected;
-            GetComponentInChildren<Button>().interactable = Selected != null && Selected.Node.CanBuild(Building);
+            Team team = Graph.Instance.NodeSelectorManager.Player.Team;
+            GetComponentInChildren<Button>().interactable = Selected != null && Selected.Node.CanBuild(Building) && team == Selected.Node.GetTeam();
         }
         Image.sprite = Building.GetIcone();
         Text.text = "Cost : " + Building.GetCost(); 
