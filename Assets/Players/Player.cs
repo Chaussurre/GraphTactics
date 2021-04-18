@@ -17,9 +17,9 @@ public abstract class Player : MonoBehaviour
             return;
 
         {//Does the player wants to attack ?
-            if (Action(out Node from, out Node target))
+            if (Action(out Node from, out Node target, out int Size))
                 if (Team.Nodes.Contains(from))
-                    from.TryAttack(target, from.GetArmySize());
+                    from.TryAttack(target, Size);
         }
 
         {//Does the player wants to create a building ?
@@ -35,7 +35,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    protected abstract bool Action(out Node from, out Node target);
+    protected abstract bool Action(out Node from, out Node target, out int Size);
 
     protected abstract bool CreateBuilding(out Node node, out Building buildingPrefab);
 

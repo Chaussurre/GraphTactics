@@ -9,6 +9,7 @@ public class Graph : MonoBehaviour
 
     static public Graph Instance;
     public NodeSelectorManager NodeSelectorManager { get; private set; }
+    public ArmyRationer ArmyRationer { get; private set; }
 
     public bool PauseGame = false;
 
@@ -24,6 +25,8 @@ public class Graph : MonoBehaviour
 
         foreach (Node node in GetComponentsInChildren<Node>())
             Nodes.Add(node);
+
+        ArmyRationer = FindObjectOfType<ArmyRationer>();
     }
 
     public Team GetWinner()

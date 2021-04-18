@@ -11,7 +11,7 @@ public class SimpleAIPlayer : Player
 
     Node lastActionFrom;
 
-    protected override bool Action(out Node from, out Node target)
+    protected override bool Action(out Node from, out Node target, out int Size)
     {
         HashSet<Node> PotentialAttackers = new HashSet<Node>();
         HashSet<Node> PotentialDefenders = new HashSet<Node>();
@@ -30,6 +30,7 @@ public class SimpleAIPlayer : Player
                 {
                     from = node;
                     target = otherNode;
+                    Size = from.GetArmySize();
                     return true;
                 }
             }
@@ -44,12 +45,14 @@ public class SimpleAIPlayer : Player
                 from = node;
                 lastActionFrom = node;
                 target = FirstStep(from, GreatestNode(PotentialAttackers));
+                Size = from.GetArmySize();
                 return true;
             }
             
 
         from = null;
         target = null;
+        Size = 0;
         return false;
     }
 

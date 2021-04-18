@@ -11,9 +11,19 @@ public class HumanPlayer : Player
         BuildMenu = FindObjectOfType<BuildMenu>();
     }
 
-    protected override bool Action(out Node from, out Node target)
+    protected override bool Action(out Node from, out Node target, out int Size)
     {
-        return Graph.Instance.NodeSelectorManager.GetAction(out from, out target);
+        ArmyRationer armyRationer = Graph.Instance.ArmyRationer;
+        float ratio = 1f;
+        if (armyRationer != null)
+            ratio = armyRationer.GetRatio();
+
+        bool result = Graph.Instance.NodeSelectorManager.GetAction(out from, out target);
+        if (from != null)
+            Size = Mathf.FloorToInt(ratio * from.GetArmySize());
+        else
+            Size = 0;
+        return result;
     }
 
     protected override bool CreateBuilding(out Node node, out Building buildingPrefab)
