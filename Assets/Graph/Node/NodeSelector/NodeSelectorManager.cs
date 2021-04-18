@@ -17,8 +17,14 @@ public class NodeSelectorManager : MonoBehaviour
         AutoSendManager = GetComponent<NodeAutoSendManager>();
     }
 
-    public void TrySelect(NodeSelector selector)
+    public void TrySelect(NodeSelector selector, bool NonTargetOnly = false)
     {
+        if(NonTargetOnly)
+        {
+            Selected = selector;
+            return;
+        }
+
         if (Graph.Instance.PauseGame)
             return;
 

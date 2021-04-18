@@ -33,19 +33,11 @@ public class NodeSelector : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        SelectorManager.TrySelect(this);
-        SelectorManager.AutoSendManager.StartAutoSending();
-        //SelectorManager.AutoSendManager.SetArrowStart(this);
-    }
-
-    private void OnMouseOver()
-    {
-        if (Input.GetMouseButton(0))
-            SelectorManager.AutoSendManager.SetArrowEnd(this);
-    }
-
-    private void OnMouseExit()
-    {
-        SelectorManager.AutoSendManager.SetArrowEnd(null);
+        Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!GetComponent<Collider2D>().OverlapPoint(MousePos))
+        {
+            SelectorManager.TrySelect(this, true);
+            SelectorManager.AutoSendManager.StartAutoSending();
+        }
     }
 }

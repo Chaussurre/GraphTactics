@@ -8,8 +8,7 @@ public class NodeAutoSendManager : MonoBehaviour
     DragNDropArrow ArrowPrefab;
     DragNDropArrow Arrow = null;
 
-    NodeSelector ArrowEnd = null;
-    bool Autosending;
+    bool AutoSending;
 
     NodeSelectorManager SelectorManager;
 
@@ -26,13 +25,15 @@ public class NodeAutoSendManager : MonoBehaviour
     void UpdateArrow()
     {
         NodeSelector ArrowStart = Graph.Instance.NodeSelectorManager.Selected;
+        Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Node ArrowEnd = Graph.Instance.FindClosestNode(MousePos);
 
-        if (!Input.GetMouseButton(0) || ArrowStart == ArrowEnd)
+        if (!Input.GetMouseButton(0) || ArrowStart == null || ArrowStart.GetComponent<Collider2D>().OverlapPoint(MousePos))
         {
             if (Arrow != null)
                 Destroy(Arrow.gameObject);
             Arrow = null;
-            Autosending = false;
+            AutoSending = false;
             return;
         }
 
@@ -45,10 +46,13 @@ public class NodeAutoSendManager : MonoBehaviour
         Color color = ArrowStart.Node.GetTeam().GetColor();
         Vector2 start = ArrowStart.transform.position;
 
-        if (ArrowEnd != null && ArrowStart.Node.GetEdge(ArrowEnd.Node) != null)
-            Arrow.SetPosition(ArrowStart.Node, ArrowEnd, color);
+        if (ArrowStart.Node.GetEdge(ArrowEnd) != null)
+            Arrow.SetPosition(ArrowStart.Node, ArrowEnd.GetComponentInChildren<NodeSelector>(), color);
         else
+        {
+            color = new Color(color.r, color.g, color.b, 0.5f);
             Arrow.SetPosition(start, Camera.main.ScreenToWorldPoint(Input.mousePosition), color);
+        }
     }
 
     bool CanDisplayArrow(NodeSelector ArrowStart)
@@ -56,7 +60,7 @@ public class NodeAutoSendManager : MonoBehaviour
         if (ArrowStart == null)
             return false;
 
-        if (!Autosending)
+        if (!AutoSending)
             return false;
 
         if (!SelectorManager.Player.Team.Nodes.Contains(ArrowStart.Node))
@@ -67,25 +71,21 @@ public class NodeAutoSendManager : MonoBehaviour
 
     public void StartAutoSending()
     {
-        Autosending = true;
-    }
-
-    public void SetArrowEnd(NodeSelector selector)
-    {
-        ArrowEnd = selector;
+        AutoSending = true;
     }
 
     public bool GetAutoSend(out Node from, out Node target)
     {
         NodeSelector ArrowStart = Graph.Instance.NodeSelectorManager.Selected;
-        if (!Input.GetMouseButton(0) &&
-            ArrowStart != null && ArrowEnd != null &&
-            ArrowStart.Node.GetEdge(ArrowEnd.Node) != null)
+        Node ArrowEnd = Graph.Instance.FindClosestNode(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+        if (Input.GetMouseButtonUp(0) && AutoSending &&
+            ArrowStart != null && ArrowStart.Node.GetEdge(ArrowEnd) != null)
         {
             from = ArrowStart.Node;
-            target = ArrowEnd.Node;
+            target = ArrowEnd;
             Graph.Instance.NodeSelectorManager.UnSelect();
-            ArrowEnd = null;
+            AutoSending = false;
             return true;
         }
 

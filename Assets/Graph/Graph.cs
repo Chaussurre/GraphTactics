@@ -43,4 +43,21 @@ public class Graph : MonoBehaviour
         }
         return winner;
     }
+    
+    public Node FindClosestNode(Vector3 point)
+    {
+        Node node = null;
+        float distance = float.MaxValue;
+        foreach (Node target in Graph.Instance.Nodes)
+        {
+            float NewDistance = (point - target.transform.position).sqrMagnitude;
+            if (distance > NewDistance)
+            {
+                distance = NewDistance;
+                node = target;
+            }
+        }
+
+        return node;
+    }
 }

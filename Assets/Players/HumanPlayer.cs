@@ -18,12 +18,13 @@ public class HumanPlayer : Player
         if (armyRationer != null)
             ratio = armyRationer.GetRatio();
 
-        bool result = Graph.Instance.NodeSelectorManager.GetAction(out from, out target);
+        bool sending = Graph.Instance.NodeSelectorManager.GetAction(out from, out target);
         if (from != null)
             Size = Mathf.FloorToInt(ratio * from.GetArmySize());
         else
             Size = 0;
-        return result;
+
+        return sending;
     }
 
     protected override bool CreateBuilding(out Node node, out Building buildingPrefab)
